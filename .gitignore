@@ -1,4 +1,6 @@
 # Composer
 composer.phar
 composer.lock
+phpcs.phar
+phpcbf.phar
 vendor/
