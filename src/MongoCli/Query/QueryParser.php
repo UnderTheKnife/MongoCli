@@ -1,8 +1,11 @@
 <?php
 namespace MongoCli\Query;
 
+use MongoCli\Query\QueryBuilder as Builder;
 /**
  * Class QueryParser
+ *
+ * @package MongoCli\Query
  */
 class QueryParser
 {
@@ -27,6 +30,7 @@ class QueryParser
             'offset'  =>  '(offset)(\s*\d+\s*)',
             'limit'   =>  '(limit)(\s*\d+\s*)',
           );
+
     /**
      * @var Parts
      */
@@ -40,18 +44,19 @@ class QueryParser
               );
 
     /**
-     * @param string $querySQL
+     * @param $querySQL, $config
      */
-    public function __construct($querySQL)
+    public function __construct($querySQL, $config)
     {
         $subject = $querySQL;
         $this->pattern = $this->buildPattern($subject);
         preg_match($this->pattern, $subject, $matches);
         $parts = $this->getParts($matches);
+        $builder = new Builder($parts, $config);
     }
 
     /*
-     * @return Pattern
+     * @return string
      */
     public function buildPattern($subject)
     {
@@ -67,7 +72,7 @@ class QueryParser
     }
 
     /*
-     * @return Parts
+     * @return array
      */
     public function getParts(array $matches)
     {
