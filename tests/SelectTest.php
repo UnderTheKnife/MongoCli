@@ -20,7 +20,8 @@ class SelectTest extends TestCase
       [
         'name',
         [
-          'name' => 1
+          'name' => 1,
+          '_id' => 0
         ],
       ],
       [
@@ -28,6 +29,7 @@ class SelectTest extends TestCase
         [
           'name' => 1,
           'age' => 1,
+          '_id' => 0
         ],
       ],
       [
@@ -36,6 +38,7 @@ class SelectTest extends TestCase
           'first_name' => 1,
           'last_name' => 1,
           'email' => 1,
+          '_id' => 0
         ],
       ],
     ];
