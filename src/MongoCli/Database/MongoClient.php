@@ -22,7 +22,6 @@ class MongoClient
      */
     public function __construct($properties, $config)
     {
-      print_r ($properties);
         $this->config = $config;
         if (empty($properties['select']) || empty($properties['from'])) {
             echo "Invalid syntax!\n";
@@ -37,11 +36,10 @@ class MongoClient
      */
     public function run($properties)
     {
-        if ($properties['select'] == '*') { $properties['select'] = array();
+        if ($properties['select'] == '*') { $properties['select'] = array('_id' => 0);
         }
         //INIT
         $mongo = new Driver\Manager($this->config['db_uri']);
-        $properties['select']['_id'] = 0;
         // SELECT
         $filter =$properties['where'];
         $options = [
@@ -61,11 +59,6 @@ class MongoClient
         } catch (Driver\Exception\Exception $e) {
             echo $e->getMessage(), "\n";
         }
-        foreach($cursor as $document) {
-            foreach ($document as $key => $value){
-                echo $key.' : '.$value.', ';
-            }
-            echo ''.PHP_EOL;
-        }
+        var_export($cursor);
     }
 }
